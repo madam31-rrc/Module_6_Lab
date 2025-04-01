@@ -19,6 +19,16 @@ function showFooterBanner() {
 	document.getElementById("footer-banner").classList.remove("hide");
 }
 
+// Respect "Do Not Track" setting
+if (navigator.doNotTrack === "1" || window.doNotTrack === "1") {
+	console.log("Do Not Track is enabled. Disabling all tracking scripts.");
+} else {
+	// Show banners and modal only if DNT is off
+	setTimeout(showFooterBanner, 1000);
+	setTimeout(showTopBanner, 2000);
+	setTimeout(showModal, 4000);
+}
+
 
 /**
  * Displays the modal by removing the 'hide' class from it.
