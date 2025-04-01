@@ -49,6 +49,9 @@ function closeTopBanner() {
  */
 function closeFooterBanner() {
 	document.getElementById("footer-banner").classList.add("hide");
+
+// Store a cookie so we remember the user closed the footer banner
+document.cookie = "footerBannerClosed=true; path=/; max-age=" + 60 * 60 * 24; // 1 day
 }
 
 // Event listeners to close the modal, top banner, and footer banner when 'x' is clicked
