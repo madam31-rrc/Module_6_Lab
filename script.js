@@ -14,13 +14,17 @@ function showTopBanner() {
  * Displays the footer banner by removing the 'hide' class from it.
  */
 function showFooterBanner() {
+	if (getCookie("footerBannerClosed")) return;
+
 	document.getElementById("footer-banner").classList.remove("hide");
 }
+
 
 /**
  * Displays the modal by removing the 'hide' class from it.
  */
 function showModal() {
+	if (localStorage.getItem("modalClosed")) return;
 	document.getElementById("modal").classList.remove("hide");
 }
 
@@ -37,12 +41,23 @@ function closeModal() {
 /**
  * Hides the top banner by adding the 'hide' class to it.
  */
-function closeTopBanner() {
-	document.getElementById("top-banner").classList.add("hide");
+function showTopBanner() {
+	if (sessionStorage.getItem("topBannerClosed")) return;
 
-    // Store a flag in sessionStorage so the banner doesn't appear again during this session
-	sessionStorage.setItem("topBannerClosed", "true");
+	const banner = document.getElementById("top-banner");
+	banner.classList.remove("hide");
+	setTimeout(function () {
+		banner.classList.add("show");
+	}, 50);
 }
+
+
+function getCookie(name) {
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 
 /**
  * Hides the footer banner by adding the 'hide' class to it.
