@@ -29,6 +29,9 @@ function showModal() {
  */
 function closeModal() {
 	document.getElementById("modal").classList.add("hide");
+
+    // Store a flag in localStorage so the modal doesn't appear again
+	localStorage.setItem("modalClosed", "true");
 }
 
 /**
@@ -36,6 +39,9 @@ function closeModal() {
  */
 function closeTopBanner() {
 	document.getElementById("top-banner").classList.add("hide");
+
+    // Store a flag in sessionStorage so the banner doesn't appear again during this session
+	sessionStorage.setItem("topBannerClosed", "true");
 }
 
 /**
@@ -56,7 +62,11 @@ document
 setTimeout(showFooterBanner, 1000);
 
 // Show the top banner after a delay of 2 seconds
-setTimeout(showTopBanner, 2000);
+if (!sessionStorage.getItem("topBannerClosed")) {
+    setTimeout(showTopBanner, 2000);
+}
 
 // Show the modal after a delay of 4 seconds
+if (!localStorage.getItem("modalClosed")) {
 setTimeout(showModal, 4000);
+}
