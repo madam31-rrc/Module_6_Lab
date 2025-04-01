@@ -16,6 +16,17 @@
 	top: 0;
 }
 
+.banner.show {
+	animation: bounce-in 1s ease;
+}
+
+@keyframes bounce-in {
+	0% { transform: translateY(-100%); opacity: 0; }
+	50% { transform: translateY(10%); opacity: 1; }
+	100% { transform: translateY(0); }
+}
+
+
 #footer-banner {
 	bottom: 0;
 }
@@ -56,4 +67,17 @@
 
 .hide {
 	display: none;
+}
+
+#clear-data {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	padding: 10px 20px;
+	background-color: #e74c3c;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+	z-index: 9999;
 }

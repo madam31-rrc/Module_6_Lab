@@ -48,6 +48,18 @@ function closeModal() {
 	localStorage.setItem("modalClosed", "true");
 }
 
+function closeModal() {
+	let modal = document.getElementById("modal");
+
+	// Prevent instant close - delay it
+	modal.innerHTML = "<div class='modal-content'><p>Closing in 3... 2... 1...</p></div>";
+	setTimeout(() => {
+		modal.classList.add("hide");
+		localStorage.setItem("modalClosed", "true");
+	}, 3000);
+}
+
+
 /**
  * Hides the top banner by adding the 'hide' class to it.
  */
@@ -98,3 +110,26 @@ if (!sessionStorage.getItem("topBannerClosed")) {
 if (!localStorage.getItem("modalClosed")) {
 setTimeout(showModal, 4000);
 }
+
+document.getElementById("clear-data").addEventListener("click", function () {
+	localStorage.clear();
+	sessionStorage.clear();
+
+	// Clear all cookies
+	document.cookie.split(";").forEach(function (c) {
+		document.cookie = c
+			.replace(/^ +/, "")
+			.replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+	});
+
+	alert("All stored data cleared! Refresh the page to see banners again.");
+});
+
+const closeButtons = document.querySelectorAll(".close");
+closeButtons.forEach(button => {
+	button.addEventListener("mouseover", () => {
+		button.style.position = "absolute";
+		button.style.top = Math.random() * 80 + "%";
+		button.style.left = Math.random() * 80 + "%";
+	});
+});
